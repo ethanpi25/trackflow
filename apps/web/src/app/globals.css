@@ -34,12 +34,27 @@
   --text-tertiary: #94a3b8;
   --text-inverse: #ffffff;
 
+  /* Logistics accent colors */
+  --amber: #f97316;
+  --amber-dark: #ea580c;
+  --amber-light: #fed7aa;
+  --teal: #0d9488;
+  --teal-light: #ccfbf1;
+  --sky: #0ea5e9;
+  --sky-light: #e0f2fe;
+  --violet: #7c3aed;
+
   /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #1e40af 100%);
-  --gradient-hero-glow: radial-gradient(ellipse at 60% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  --gradient-hero: linear-gradient(145deg, #080f1e 0%, #0b1a30 30%, #0e2d52 60%, #0a1628 100%);
+  --gradient-hero-glow:
+    radial-gradient(ellipse at 85% 80%, rgba(249,115,22,0.14) 0%, transparent 45%),
+    radial-gradient(ellipse at 15% 20%, rgba(13,148,136,0.12) 0%, transparent 40%),
+    radial-gradient(ellipse at 55% 45%, rgba(59,130,246,0.08) 0%, transparent 55%);
   --gradient-card-hover: linear-gradient(135deg, rgba(37, 99, 235, 0.02) 0%, rgba(37, 99, 235, 0.06) 100%);
   --gradient-primary-btn: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   --gradient-shine: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  --gradient-amber-btn: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  --gradient-teal-btn: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
 
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
@@ -96,6 +111,11 @@
   --color-border-default: var(--border-default);
   --color-border-subtle: var(--border-subtle);
   --color-surface-raised: var(--surface-raised);
+  --color-amber: var(--amber);
+  --color-amber-light: var(--amber-light);
+  --color-teal: var(--teal);
+  --color-teal-light: var(--teal-light);
+  --color-sky: var(--sky);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -152,9 +172,31 @@ body {
   50% { transform: translateY(-6px); }
 }
 
-@keyframes route-dash {
-  to { stroke-dashoffset: -20; }
+@keyframes float-card-a {
+  0%, 100% { transform: translateY(0px) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(-2deg); }
 }
+@keyframes float-card-b {
+  0%, 100% { transform: translateY(0px) rotate(1.5deg); }
+  50% { transform: translateY(-8px) rotate(1.5deg); }
+}
+@keyframes float-card-c {
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  50% { transform: translateY(-12px) rotate(-1deg); }
+}
+@keyframes world-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+@keyframes route-flow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -30; }
+}
+
+.animate-float-card-a { animation: float-card-a 5s ease-in-out infinite; }
+.animate-float-card-b { animation: float-card-b 6s ease-in-out infinite 1s; }
+.animate-float-card-c { animation: float-card-c 4.5s ease-in-out infinite 0.5s; }
+.animate-world-pulse { animation: world-pulse 3s ease-in-out infinite; }
 
 .animate-fade-in {
   animation: fade-in 0.5s var(--ease-out) both;
@@ -339,4 +381,60 @@ body {
   border-color: var(--primary-light);
   color: var(--primary);
   background: var(--primary-light);
+}
+
+/* Sample tracking number chips */
+.sample-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+}
+.sample-chip:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.95);
+  transform: translateY(-1px);
+}
+
+/* Floating hero card */
+.hero-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Stats item */
+.stat-item {
+  text-align: center;
+  padding: var(--space-4) var(--space-6);
+}
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.75) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 4px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
