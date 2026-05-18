@@ -1,0 +1,6 @@
+{
+  "buildCommand": "pnpm --filter @logistic/shared build && pnpm --filter @logistic/web build",
+  "outputDirectory": "apps/web/.next",
+  "installCommand": "pnpm install",
+  "framework": "nextjs"
+}
