@@ -4,7 +4,6 @@ export function HeroIllustration({ className }: { className?: string }) {
       viewBox="0 0 900 420"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
       className={className}
     >
       <defs>
@@ -100,7 +99,7 @@ export function HeroIllustration({ className }: { className?: string }) {
       {/* ===== Airplane ===== */}
       <g>
         <animateMotion dur="8s" repeatCount="indefinite" rotate="auto">
-          <mpath xlinkHref="#air-path" />
+          <mpath href="#air-path" />
         </animateMotion>
         {/* Airplane body */}
         <g transform="translate(-10, -6)">
@@ -114,7 +113,7 @@ export function HeroIllustration({ className }: { className?: string }) {
       {/* ===== Ship ===== */}
       <g>
         <animateMotion dur="14s" repeatCount="indefinite" rotate="auto">
-          <mpath xlinkHref="#sea-path" />
+          <mpath href="#sea-path" />
         </animateMotion>
         <g transform="translate(-12, -7)">
           {/* Ship hull */}
@@ -129,7 +128,7 @@ export function HeroIllustration({ className }: { className?: string }) {
       {/* ===== Truck ===== */}
       <g>
         <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
-          <mpath xlinkHref="#truck-path" />
+          <mpath href="#truck-path" />
         </animateMotion>
         <g transform="translate(-10, -7)">
           {/* Cab */}

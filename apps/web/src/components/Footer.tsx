@@ -23,7 +23,7 @@ export function Footer() {
             {t("footer.description", locale)}
           </p>
           <div className="flex items-center gap-6 text-xs text-text-tertiary">
-            <span>&copy; {new Date().getFullYear()} TrackFlow</span>
+            <span suppressHydrationWarning>&copy; {new Date().getFullYear()} TrackFlow</span>
             <span className="h-3 w-px bg-border-default" />
             <span>{locale === "zh" ? "隐私政策" : "Privacy"}</span>
             <span className="h-3 w-px bg-border-default" />
