@@ -1,6 +1,5 @@
 {
   "installCommand": "npm install -g pnpm && pnpm install --frozen-lockfile",
   "buildCommand": "pnpm --filter @logistic/web build",
-  "outputDirectory": "apps/web/.next",
   "framework": "nextjs"
 }
