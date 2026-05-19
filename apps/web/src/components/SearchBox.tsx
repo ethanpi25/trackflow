@@ -34,6 +34,16 @@ export function SearchBox({ variant = "hero" }: SearchBoxProps) {
     setTrackingNumber(number);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const trimmed = trackingNumber.trim();
+      if (trimmed.length >= 5) {
+        router.push(`/track/${encodeURIComponent(trimmed)}`);
+      }
+    }
+  };
+
   if (variant === "compact") {
     return (
       <form onSubmit={handleSubmit} className="w-full max-w-lg">
@@ -43,6 +53,7 @@ export function SearchBox({ variant = "hero" }: SearchBoxProps) {
             type="text"
             value={trackingNumber}
             onChange={(e) => setTrackingNumber(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder={t("search.placeholder", locale)}
             className="flex-1 bg-transparent px-3 py-2.5 text-sm outline-none placeholder:text-text-tertiary"
           />
@@ -68,6 +79,7 @@ export function SearchBox({ variant = "hero" }: SearchBoxProps) {
             type="text"
             value={trackingNumber}
             onChange={(e) => setTrackingNumber(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder={t("search.placeholder", locale)}
             className="flex-1 bg-transparent px-4 py-4 text-base outline-none placeholder:text-text-tertiary"
           />

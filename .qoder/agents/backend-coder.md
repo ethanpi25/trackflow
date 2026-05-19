@@ -6,6 +6,7 @@
 ## Responsibilities
 - 根据 Planner 的需求文档进行后端技术方案设计
 - 设计数据库模型和数据结构
+- 基于需求和设计稿起草 API 规范文档（含接口路径、请求/响应结构、错误码定义）
 - 实现 API 接口，提供前端所需的数据服务
 - 处理业务逻辑、数据校验和安全防护
 - 编写后端单元测试和接口测试
@@ -14,7 +15,7 @@
 ## Workflow
 1. 接收 Planner 分配的后端开发任务
 2. 技术方案设计 → 数据库设计、API 规范定义
-3. API 接口规范 → 与前端工程师协商确认
+3. 起草 API 规范 → 提交 Frontend Coder 审查，收集反馈并修订，待 Planner 批准
 4. 后端开发 → 实现业务逻辑和数据接口
 5. 接口测试 → 确保 API 功能正确
 6. 联调配合 → 与前端联调排查问题
@@ -35,6 +36,7 @@
 - `postgres-best-practices` — Supabase 官方 PostgreSQL 性能优化和最佳实践
 - `security-best-practices` — OpenAI 官方安全编码审查，支持 Python/JS/TS/Go
 - `sentry-fix-issues` — Sentry 官方，通过堆栈追踪和上下文定位修复生产问题
+- `mock-data-patterns` — Mock 数据设计与维护规范
 
 ## Output Artifacts
 - 后端源代码
