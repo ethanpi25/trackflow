@@ -1583,7 +1583,16 @@ export function CostTrendCard() {
 }
 
 // ── 卡片：中大件锁仓成功 — 订单详情（含支付 + 客服弹层）──
+const BULK_TRACKING_EVENTS = [
+  { time: "2026-05-19 10:32", status: "done", label: "订单确认", desc: "BLK-2026051802-FCL 已确认，舱位锁定中" },
+  { time: "2026-05-19 11:45", status: "done", label: "支付完成", desc: "USD 1,750 已收款，订单进入备货阶段" },
+  { time: "2026-05-22（预计）", status: "active", label: "舱位确认中", desc: "中远海运舱位确认，等待截关时间通知" },
+  { time: "2026-06-10（预计）", status: "pending", label: "预计开船", desc: "深圳蛇口港 → 汉堡" },
+  { time: "2026-07-08（预计）", status: "pending", label: "预计到港", desc: "汉堡港，待安排提货" },
+];
+
 export function BulkOrderDetailCard() {
+  const [view, setView] = useState<"order" | "tracking">("order");
   const [tab, setTab] = useState<"detail" | "docs">("detail");
   const [paymentStatus, setPaymentStatus] = useState<"pending" | "paying" | "paid">("pending");
   const [showCSModal, setShowCSModal] = useState(false);
@@ -1646,6 +1655,48 @@ Hamburg Logistics GmbH
     { name: "装箱单 (Packing List)", status: "pending", icon: "📦" },
     { name: "原产地证书 (CO)", status: "pending", icon: "🏛️" },
   ];
+
+  if (view === "tracking") {
+    return (
+      <div className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50/60 to-white p-4 space-y-3 shadow-sm">
+        <div className="flex items-center gap-2">
+          <button onClick={() => setView("order")} className="text-blue-400 hover:text-blue-600 transition-colors text-xs">← 返回</button>
+          <span className="text-sm font-bold text-blue-700">物流轨迹</span>
+          <span className="ml-auto text-[11px] bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full font-medium">舱位确认中</span>
+        </div>
+        <div className="text-[11px] text-slate-400 font-mono">BLK-2026051802-FCL · 中远海运 COSCO</div>
+
+        <div className="space-y-0">
+          {BULK_TRACKING_EVENTS.map((ev, i) => (
+            <div key={i} className="flex gap-3">
+              <div className="flex flex-col items-center">
+                <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5 ${
+                  ev.status === "done" ? "bg-blue-600 text-white"
+                  : ev.status === "active" ? "bg-amber-400 text-white ring-4 ring-amber-100"
+                  : "bg-slate-200 text-slate-400"
+                }`}>
+                  {ev.status === "done" ? "✓" : ev.status === "active" ? "●" : i + 1}
+                </div>
+                {i < BULK_TRACKING_EVENTS.length - 1 && (
+                  <div className={`w-0.5 h-7 mt-0.5 ${ev.status === "done" ? "bg-blue-200" : "bg-slate-200"}`} />
+                )}
+              </div>
+              <div className="pb-3 flex-1 min-w-0">
+                <div className={`text-xs font-semibold ${ev.status === "done" ? "text-slate-700" : ev.status === "active" ? "text-amber-700" : "text-slate-400"}`}>{ev.label}</div>
+                {ev.desc && <div className={`text-[11px] mt-0.5 ${ev.status === "pending" ? "text-slate-300" : "text-slate-400"}`}>{ev.desc}</div>}
+                <div className={`text-[10px] mt-0.5 ${ev.status === "pending" ? "text-slate-300" : "text-slate-400"}`}>{ev.time}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2 bg-blue-600/5 border border-blue-100 rounded-xl px-3 py-2 text-xs">
+          <span>🚢</span>
+          <span className="text-slate-600">预计 <strong className="text-blue-600">7月8日</strong> 抵达汉堡港，当前舱位确认中，请耐心等待</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -1742,7 +1793,9 @@ Hamburg Logistics GmbH
               <button className="flex-1 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-medium hover:bg-emerald-700 transition-all shadow-sm">
                 📄 下载提单草稿
               </button>
-              <button className="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-xs font-medium hover:bg-slate-50 transition-all">
+              <button className="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-xs font-medium hover:bg-slate-50 transition-all"
+                onClick={() => setView("tracking")}
+              >
                 🚢 跟踪物流
               </button>
             </div>
