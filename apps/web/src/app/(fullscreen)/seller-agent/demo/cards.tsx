@@ -1453,7 +1453,7 @@ export function ExpertQuotesCard({ onProviderConfirm }: { onProviderConfirm?: (p
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
                   <span className="text-xl font-black" style={{ color: provider.color }}>
-                    ${provider.quote.price.toLocaleString()}<span className="text-xs font-medium text-slate-400 ml-0.5">/{provider.quote.priceUnit.replace("$/", "")}</span>
+                    ${provider.quote.price.toFixed(2)}<span className="text-xs font-medium text-slate-400 ml-0.5">/{provider.quote.priceUnit.replace("$/", "")}</span>
                   </span>
                 </div>
                 <div className="text-right text-xs text-slate-500">

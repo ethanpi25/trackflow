@@ -231,8 +231,8 @@ export const expertProviders = [
     quote: {
       route: "深圳 → 汉堡 (直航)",
       type: "FCL 20GP + 门到门",
-      price: 1750,
-      priceUnit: "$/柜",
+      price: 0.88,
+      priceUnit: "$/kg",
       transitDays: "26-30 天",
       onTimeRate: 93,
       incoterms: "FOB / CIF 可选",
@@ -250,8 +250,8 @@ export const expertProviders = [
     quote: {
       route: "深圳 → 杜伊斯堡 (海铁联运)",
       type: "FCL 20GP + 铁路转运",
-      price: 2100,
-      priceUnit: "$/柜",
+      price: 1.05,
+      priceUnit: "$/kg",
       transitDays: "20-25 天",
       onTimeRate: 90,
       incoterms: "CIF / DAP",
@@ -269,8 +269,8 @@ export const expertProviders = [
     quote: {
       route: "深圳 → 法兰克福 (空运)",
       type: "空运 2000kg + 清关",
-      price: 5400,
-      priceUnit: "$/批",
+      price: 2.70,
+      priceUnit: "$/kg",
       transitDays: "5-8 天",
       onTimeRate: 96,
       incoterms: "DDP",
