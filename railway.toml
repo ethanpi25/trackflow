@@ -1,0 +1,8 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm install -g pnpm@latest && pnpm install --frozen-lockfile && pnpm --filter @logistic/web build"
+
+[deploy]
+startCommand = "pnpm --filter @logistic/web start"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3

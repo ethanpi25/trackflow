@@ -701,15 +701,14 @@ export function SpecialCargoCard({
   );
 }
 
-// ── 卡片四：中大件基础询价（海运 + 空运 Tab）─────────────
+// ── 卡片四：大件基础询价（海运 + 空运 Tab）─────────────
 export function BulkBasicQuoteCard() {
   const [activeTab, setActiveTab] = useState<"sea" | "air">("sea");
-  const [editMode, setEditMode] = useState(false);
-  const [cargoInfo, setCargoInfo] = useState({
+  const [cargoInfo] = useState({
     type: "健身器材",
     weight: "约 2 吨",
     dest: "深圳 → 德国",
-    transport: "海运 FCL",
+    transport: "海运",
   });
   const routes = activeTab === "sea" ? bulkSeaRoutes : bulkAirRoutes;
   const badgeBg: Record<string, string> = {
@@ -722,77 +721,39 @@ export function BulkBasicQuoteCard() {
     <div className="space-y-3">
       {/* AI 货物解析摘要 */}
       <div className="rounded-xl border border-blue-200 bg-blue-50/60 p-3.5 space-y-2.5">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <span className="text-sm">🤖</span>
-            <span className="text-xs font-semibold text-blue-700">AI 货物解析结果</span>
-          </div>
-          {editMode ? (
-            <button
-              onClick={() => setEditMode(false)}
-              className="text-[11px] text-slate-400 hover:text-slate-600 transition-colors"
-            >✕ 取消</button>
-          ) : (
-            <button
-              onClick={() => setEditMode(true)}
-              className="text-[11px] text-blue-500 hover:text-blue-700 underline underline-offset-2 transition-colors"
-            >✏️ 修改货物信息</button>
-          )}
+        <div className="flex items-center gap-1.5">
+          <span className="text-sm">🤖</span>
+          <span className="text-xs font-semibold text-blue-700">AI 货物解析结果</span>
         </div>
-        {!editMode ? (
-          <div className="grid grid-cols-3 gap-2">
-            {[
-              { label: "货品类型", value: cargoInfo.type },
-              { label: "重量 / 体积", value: cargoInfo.weight },
-              { label: "目的地", value: cargoInfo.dest },
-            ].map(({ label, value }) => (
-              <div key={label} className="bg-white rounded-lg px-2.5 py-2 border border-blue-100">
-                <div className="text-[10px] text-slate-400 mb-0.5">{label}</div>
-                <div className="text-xs font-semibold text-slate-700 truncate">{value}</div>
-              </div>
-            ))}
-            <div className="col-span-3 flex gap-3 text-xs text-slate-500 mt-0.5">
-              <span>运输方式：<strong className="text-slate-700">{cargoInfo.transport}</strong></span>
-              <span>贸易术语：<strong className="text-slate-400">待确认</strong></span>
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            { label: "货品类型", value: cargoInfo.type },
+            { label: "重量 / 体积", value: cargoInfo.weight },
+            { label: "目的地", value: cargoInfo.dest },
+          ].map(({ label, value }) => (
+            <div key={label} className="bg-white rounded-lg px-2.5 py-2 border border-blue-100">
+              <div className="text-[10px] text-slate-400 mb-0.5">{label}</div>
+              <div className="text-xs font-semibold text-slate-700 truncate">{value}</div>
             </div>
+          ))}
+          <div className="col-span-3 flex gap-3 text-xs text-slate-500 mt-0.5">
+            <span>运输方式：<strong className="text-slate-700">{cargoInfo.transport}</strong></span>
+            <span>贸易术语：<strong className="text-slate-400">DDP 含税</strong></span>
           </div>
-        ) : (
-          <div className="space-y-2">
-            {[
-              { key: "type" as const, label: "货品名称" },
-              { key: "weight" as const, label: "重量 / 体积" },
-              { key: "dest" as const, label: "目的地" },
-              { key: "transport" as const, label: "运输方式" },
-            ].map(({ key, label }) => (
-              <div key={key} className="space-y-0.5">
-                <div className="text-[10px] text-slate-500 font-medium">{label}</div>
-                <input
-                  type="text"
-                  value={cargoInfo[key]}
-                  onChange={(e) => setCargoInfo(prev => ({ ...prev, [key]: e.target.value }))}
-                  className="w-full border border-blue-200 rounded-lg px-3 py-1.5 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-blue-300/40 transition-all"
-                />
-              </div>
-            ))}
-            <button
-              onClick={() => setEditMode(false)}
-              className="w-full py-2 rounded-lg bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition-all"
-            >确认修改</button>
-          </div>
-        )}
+        </div>
       </div>
 
       {/* 顶部 banner */}
       <div className="rounded-2xl bg-gradient-to-r from-slate-800 to-slate-700 p-3.5 text-white shadow-md">
-        <div className="text-[11px] opacity-60 mb-1">中大件 · 基础即时报价 · 深圳 → 德国</div>
+        <div className="text-[11px] opacity-60 mb-1">大件 · 基础即时报价 · 深圳 → 德国 · DDP 门到门</div>
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-xl font-black">{activeTab === "sea" ? "$1,850" : "$5,400"}</span>
-            <span className="text-sm opacity-70 ml-1">起</span>
+            <span className="text-xl font-black">{activeTab === "sea" ? "$3.2" : "$18.5"}</span>
+            <span className="text-sm opacity-70 ml-1">起 / kg</span>
           </div>
           <div className="text-right text-[11px]">
-            <div className="opacity-60">{activeTab === "sea" ? "FCL 20GP 海运" : "空运 1000kg+"}</div>
-            <div className="font-bold text-blue-300">{activeTab === "sea" ? "22-35 天到港" : "4-7 天到达"}</div>
+            <div className="opacity-60">{activeTab === "sea" ? "海运 门到门" : "空运 门到门"}</div>
+            <div className="font-bold text-blue-300">{activeTab === "sea" ? "18-35 天到港" : "3-8 天到达"}</div>
           </div>
         </div>
       </div>
@@ -810,7 +771,7 @@ export function BulkBasicQuoteCard() {
             }`}
           >
             <span>{tab === "sea" ? "🌊" : "✈️"}</span>
-            <span>{tab === "sea" ? "海运 FCL" : "空运"}</span>
+            <span>{tab === "sea" ? "海运" : "空运"}</span>
           </button>
         ))}
       </div>
@@ -848,7 +809,7 @@ export function BulkBasicQuoteCard() {
               </div>
               <div className="text-right ml-3 flex-shrink-0">
                 <div className="text-lg font-black text-blue-600 leading-tight">
-                  ${route.price.toLocaleString()}<span className="text-xs font-medium text-slate-400 ml-0.5">{route.priceUnit.replace("$", "")}</span>
+                  ${route.price.toFixed(1)}<span className="text-xs font-medium text-slate-400 ml-0.5">{route.priceUnit.replace("$", "")}</span>
                 </div>
                 <div className="text-xs text-slate-500">{route.transitDays}</div>
                 <div className="text-[10px] text-slate-400">准点率 {route.onTimeRate}%</div>
@@ -861,7 +822,7 @@ export function BulkBasicQuoteCard() {
       {/* 底部提示 */}
       <div className="flex items-center gap-2 text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5">
         <span>ℹ️</span>
-        <span className="text-slate-500">以上为参考报价，正式价格以货代确认为准。需要更精准的定制报价？升级专家模式获取全网比价 →</span>
+        <span className="text-slate-500">以上为参考报价，正式价格以确认为准。需要更精准的定制报价？升级专家模式获取全网比价 →</span>
       </div>
     </div>
   );
