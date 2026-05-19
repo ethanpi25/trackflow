@@ -71,7 +71,7 @@ function MessageBubble({
   expertModeActive: boolean;
   quoteValidationError: string;
   onRouteSelectionChange: (ids: string[]) => void;
-  onCardAction: () => void;
+  onCardAction: (skipUserStep?: boolean) => void;
 }) {
   const isUser = msg.role === "user";
 

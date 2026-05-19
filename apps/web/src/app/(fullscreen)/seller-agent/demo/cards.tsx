@@ -1240,12 +1240,20 @@ export function ShipmentCreatedCard({ selectedTierId = "standard" }: { selectedT
         ))}
       </div>
 
-      <button
-        onClick={() => setView("order")}
-        className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-emerald-200 text-emerald-700 text-sm font-medium hover:bg-emerald-50 transition-all"
-      >
-        <span>📋</span><span>查看订单详情</span>
-      </button>
+      <div className="flex gap-2">
+        <button
+          onClick={() => setView("order")}
+          className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl border border-emerald-200 text-emerald-700 text-sm font-medium hover:bg-emerald-50 transition-all"
+        >
+          <span>📋</span><span>查看订单详情</span>
+        </button>
+        <button
+          onClick={() => setView("tracking")}
+          className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-all shadow-sm"
+        >
+          <span>🚚</span><span>查看物流轨迹</span>
+        </button>
+      </div>
     </div>
   );
 }
@@ -1818,3 +1826,4 @@ Hamburg Logistics GmbH
     </>
   );
 }
+
