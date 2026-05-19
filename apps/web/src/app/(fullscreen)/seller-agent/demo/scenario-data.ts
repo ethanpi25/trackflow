@@ -441,13 +441,6 @@ export const scenarios: Scenario[] = [
       ],
       [
         {
-          id: "b-u6",
-          role: "user",
-          text: "选择中远海运",
-        },
-      ],
-      [
-        {
           id: "b-a7",
           role: "agent",
           text: "✅ 已选中远海运方案！AI 方案已生成，正在自动启动准实时锁仓 ⚡",
