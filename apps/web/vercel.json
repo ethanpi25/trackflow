@@ -1,4 +1,5 @@
 {
-  "installCommand": "cd ../.. && pnpm install",
-  "buildCommand": "cd ../.. && pnpm --filter @logistic/web build"
+  "installCommand": "npm install -g pnpm && cd ../.. && pnpm install --frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm --filter @logistic/web build",
+  "outputDirectory": ".next"
 }
