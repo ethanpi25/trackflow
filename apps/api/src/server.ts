@@ -4,6 +4,7 @@ import rateLimit from '@fastify/rate-limit';
 import { config } from 'dotenv';
 import Redis from 'ioredis';
 import { trackRoutes } from './routes/track.js';
+import { buyerAgentRoutes } from './routes/buyer-agent.js';
 
 config(); // Load .env
 
@@ -47,6 +48,7 @@ async function main() {
 
   // Register routes
   await trackRoutes(app, redis);
+  await buyerAgentRoutes(app);
 
   // Start server
   await app.listen({ port: PORT, host: HOST });
